@@ -88,6 +88,7 @@ const Instructor = () => {
                subTitle="Smile attract the heart keep smiling"
             ></SectionTitle>
             <div className="grid gap-8 grid-cols-1 mb-24 lg:grid-cols-2 mx-auto">
+               <p>All instructors are coming soon..</p>
                {classes?.map((classs) => (
                   <ClassCard classs={classs} key={classs._id}></ClassCard>
                ))}
