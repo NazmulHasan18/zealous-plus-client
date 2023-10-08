@@ -14,35 +14,51 @@ const AddAClass = () => {
       formState: { errors },
    } = useForm();
    const onSubmit = (data) => {
-      const classs = {
-         class_name: data.class_name,
-         image: data.image,
-         teacher: { name: data.name, email: data.email },
-         current_students: 0,
-         total_seats: parseInt(data.total_seats),
-         status: "pending",
-         price: parseFloat(data.price),
-         duration: parseFloat(data.duration),
-      };
+      const formData = new FormData();
+      formData.append("image", data.image[0]);
 
       axios
-         .post(`http://localhost:5000/add_class?email=${user?.email}`, classs, {
-            headers: { Authorization: `Bearer ${token}` },
+         .post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_ImgbbApiKey}`, formData, {
+            headers: {
+               "Content-Type": "multipart/form-data",
+            },
          })
-         .then(function (response) {
-            if (response?.data?.insertedId) {
-               Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: `Class Added Successful`,
-                  showConfirmButton: false,
-                  timer: 1000,
+         .then((res) => {
+            const classs = {
+               class_name: data.class_name,
+               image: res.data.data.url,
+               teacher: { name: data.name, email: data.email },
+               current_students: 0,
+               total_seats: parseInt(data.total_seats),
+               status: "pending",
+               price: parseFloat(data.price),
+               duration: parseFloat(data.duration) + " " + "months",
+            };
+
+            axios
+               .post(
+                  `https://zealous-plus-server-d50zfrkhy-nazmulhasan18.vercel.app/add_class?email=${user?.email}`,
+                  classs,
+                  {
+                     headers: { Authorization: `Bearer ${token}` },
+                  }
+               )
+               .then(function (response) {
+                  if (response?.data?.insertedId) {
+                     Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `Class Added Successful`,
+                        showConfirmButton: false,
+                        timer: 1000,
+                     });
+                  }
+               })
+               .catch(function (error) {
+                  console.log(error);
                });
-            }
          })
-         .catch(function (error) {
-            console.log(error);
-         });
+         .catch((err) => console.log(err));
    };
 
    return (
@@ -146,12 +162,13 @@ const AddAClass = () => {
                         <div className="form-control w-full lg:w-1/2">
                            <label className="label">
                               <span className="label-text">
-                                 Class Duration<span className="text-red-500 text-base">*</span>
+                                 Class Duration {"(month)"}
+                                 <span className="text-red-500 text-base">*</span>
                               </span>
                            </label>
                            <input
                               type="number"
-                              placeholder="Your Class Image"
+                              placeholder="Your Class Duration"
                               className="input-warning input input-bordered rounded-full"
                               {...register("duration", {
                                  required: true,
@@ -171,9 +188,9 @@ const AddAClass = () => {
                            </span>
                         </label>
                         <input
-                           type="text"
-                           placeholder="Your Class Image"
-                           className="input-warning input input-bordered rounded-full"
+                           type="file"
+                           className="file-input file-input-bordered file-input-warning w-full rounded-full"
+                           accept="image/*"
                            {...register("image", {
                               required: true,
                            })}

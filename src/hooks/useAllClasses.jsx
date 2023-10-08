@@ -9,7 +9,7 @@ const useAllClasses = () => {
       isLoading: loadingClasses,
       refetch: refetchClasses,
    } = useQuery(["classes", user?.email], async () => {
-      const res = await axios.get(`http://localhost:5000/classes`);
+      const res = await axios.get(`https://zealous-plus-server-d50zfrkhy-nazmulhasan18.vercel.app/classes`);
       return res.data;
    });
    return { classes, loadingClasses, refetchClasses };
