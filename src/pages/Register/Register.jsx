@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
 import { createUser } from "../../API/api";
+import axios from "axios";
 
 const Register = () => {
    const { emailPassSignUp, updateUser } = useAuth();
@@ -19,46 +20,69 @@ const Register = () => {
       handleSubmit,
       formState: { errors },
    } = useForm();
-   const onSubmit = (data) => {
+   const onSubmit = async (data) => {
+      console.log(data);
       setErr("");
       if (data.password !== data.confirm_password) {
          setErr("Password Does not match");
          errors.confirm_password = true;
          return;
       }
-      emailPassSignUp(data.email, data.password, data.number)
-         .then((userCredential) => {
-            const loggedUser = userCredential.user;
-            if (loggedUser) {
-               updateUser(data.name, data.user_image)
-                  .then(() => {
-                     const userData = {
-                        name: data.name,
-                        email: data.email,
-                        number: data.number,
-                        gender: data.gender,
-                        user_image: data.user_image,
-                        role: "user",
-                     };
-                     createUser(userData);
-                     navigate(from);
-                     Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: `${loggedUser?.displayName} Register Successful`,
-                        showConfirmButton: false,
-                        timer: 1000,
-                     });
-                  })
-                  .catch((error) => {
-                     console.log(error);
-                     toast.error(error.message);
-                  });
+      const formData = new FormData();
+      formData.append("image", data.user_image[0]);
+
+      try {
+         const response = await axios.post(
+            `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_ImgbbApiKey}`,
+            formData,
+            {
+               headers: {
+                  "Content-Type": "multipart/form-data",
+               },
             }
-         })
-         .catch((error) => {
-            toast.error(error.message);
-         });
+         );
+
+         if (response) {
+            emailPassSignUp(data.email, data.password)
+               .then((userCredential) => {
+                  const loggedUser = userCredential.user;
+                  const userInfo = { name: data.name, photoUrl: response.data.data.url };
+                  if (loggedUser) {
+                     updateUser(userInfo)
+                        .then(() => {
+                           const userData = {
+                              name: data.name,
+                              email: data.email,
+                              number: data.number,
+                              gender: data.gender,
+                              user_image: response.data.data.url,
+                              role: "user",
+                           };
+                           createUser(userData);
+                           navigate(from);
+                           Swal.fire({
+                              position: "top-end",
+                              icon: "success",
+                              title: `${loggedUser?.displayName} Register Successful`,
+                              showConfirmButton: false,
+                              timer: 1000,
+                           });
+                        })
+                        .catch((error) => {
+                           console.log(error);
+                           toast.error(error.message);
+                        });
+                  }
+               })
+               .catch((error) => {
+                  toast.error(error.message);
+               });
+         }
+
+         console.log("Image uploaded successfully:", response.data.data.url);
+      } catch (error) {
+         console.error("Error uploading image:", error);
+      }
    };
 
    return (
@@ -214,15 +238,23 @@ const Register = () => {
                            </span>
                         </label>
                         <input
+                           type="file"
+                           className="file-input file-input-bordered file-input-warning w-full rounded-full"
+                           accept="image/*"
+                           {...register("user_image", {
+                              required: true,
+                           })}
+                        />
+                        {/* <input
                            type="text"
                            placeholder="Your Photo URL"
                            className="input-warning input input-bordered rounded-full"
                            {...register("user_image", {
                               required: true,
                            })}
-                        />
+                        /> */}
                         {errors.user_image && (
-                           <span className="text-red-500 text-base">Please Provide Your Image URL!</span>
+                           <span className="text-red-500 text-base">Please Provide Your Image!</span>
                         )}
                      </div>
                      <div className="form-control mt-6 w-1/2 mx-auto">

@@ -42,7 +42,7 @@ const Home = () => {
       <div>
          <Banner></Banner>
          <div className="flex lg:text-xl lg:-mt-24 lg:mb-20 max-w-screen-2xl font-semibold mx-auto">
-            <p className="bg-orange-600 text-white py-1  lg:w-[230px]  px-4 lg:py-4 lg:px-10 z-40">{time}</p>
+            <p className="bg-orange-600 text-white py-1 lg:w-[230px]  px-4 lg:py-4 lg:px-10 z-10">{time}</p>
             <Marquee>
                <p className="shadow-2xl">
                   &rdquo;{quotes.text}&rdquo;-{" "}

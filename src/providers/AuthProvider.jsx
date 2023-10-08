@@ -5,13 +5,17 @@ import {
    createUserWithEmailAndPassword,
    getAuth,
    onAuthStateChanged,
+   sendEmailVerification,
    sendPasswordResetEmail,
    signInWithEmailAndPassword,
    signInWithPopup,
    signOut,
+   updateEmail,
+   updatePhoneNumber,
    updateProfile,
 } from "firebase/auth";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const AuthContext = createContext();
 
@@ -40,18 +44,41 @@ const AuthProvider = ({ children }) => {
    };
 
    //    update user
-   const updateUser = (name, photoUrl, number) => {
+   const updateUser = (data) => {
+      const { name, photoUrl } = data;
       return updateProfile(auth.currentUser, {
          displayName: name,
          photoURL: photoUrl,
-         phoneNumber: number,
       });
+   };
+
+   // todo: update mobile number
+   const updateMobileNumber = (number) => {
+      return updatePhoneNumber(auth.currentUser, { phoneNumber: number });
+   };
+
+   // update Email
+   const updateNewEmail = (email) => {
+      return updateEmail(auth.currentUser, email);
    };
 
    //    reset password
 
    const resetPassword = (email) => {
       return sendPasswordResetEmail(auth, email);
+   };
+
+   // verify email
+   const verifyEmail = () => {
+      sendEmailVerification(auth.currentUser).then(() => {
+         Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `Please check your email. Verify Email sent`,
+            showConfirmButton: false,
+            timer: 1000,
+         });
+      });
    };
 
    // !log out function
@@ -68,7 +95,7 @@ const AuthProvider = ({ children }) => {
          console.log(loggedUser);
          if (loggedUser) {
             axios
-               .post("https://translingua-server.vercel.app/jwt", {
+               .post("http://localhost:5000/jwt", {
                   email: loggedUser.email,
                })
                .then((response) => {
@@ -93,6 +120,9 @@ const AuthProvider = ({ children }) => {
       updateUser,
       resetPassword,
       logOut,
+      verifyEmail,
+      updateMobileNumber,
+      updateNewEmail,
    };
 
    return <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>;

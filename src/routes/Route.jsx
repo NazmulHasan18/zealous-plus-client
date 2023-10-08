@@ -20,6 +20,7 @@ import ManageUsers from "../pages/Dashboard/admins/ManageUsers/ManageUsers";
 import Error from "../pages/home/Error/Error";
 import ManageClasses from "../pages/Dashboard/admins/MangeClasses/ManageClasses";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import Profile from "../pages/Profile/Profile";
 
 export const router = createBrowserRouter([
    {
@@ -50,6 +51,14 @@ export const router = createBrowserRouter([
          {
             path: "/instructor/:id",
             element: <Instructor></Instructor>,
+         },
+         {
+            path: "/profile",
+            element: (
+               <PrivateRoute>
+                  <Profile></Profile>
+               </PrivateRoute>
+            ),
          },
       ],
    },
