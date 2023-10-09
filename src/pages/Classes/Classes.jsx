@@ -22,7 +22,7 @@ const Classes = () => {
    }
 
    return (
-      <div className="">
+      <div className="container mx-auto">
          <PageCover title="Classes" subTitle="All The Classes Are In A page"></PageCover>
          <SectionTitle
             title="All Classes"

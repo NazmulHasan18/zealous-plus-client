@@ -44,12 +44,12 @@ const ClassCard = ({ classs }) => {
                   <p className="font-bold">
                      Current Student: <span className="font-semibold">{current_students}</span>
                   </p>
-                  <div className="lg:flex gap-4">
+                  <div>
                      <p className="font-semibold">
-                        Price: <span className="">$ {price}</span>
+                        Price: <span className="">{price} Rs</span>
                      </p>
                      <p className="font-semibold">
-                        Duration: <span className="">{duration} Month</span>
+                        Duration: <span className="">{duration} Months</span>
                      </p>
                   </div>
 

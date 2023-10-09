@@ -20,7 +20,7 @@ const Banner = () => {
                      </p>
                      <div className="lg:py-10">
                         <Link to="/classes">
-                           <button className="btn btn-outline btn-xs text-base md:text-xl sm:btn-sm md:btn-md lg:btn-lg btn-natural font-bold">
+                           <button className="btn btn-outline btn-xs text-base md:text-xl sm:btn-sm md:btn-md btn-natural font-bold">
                               Enroll Now!
                            </button>
                         </Link>

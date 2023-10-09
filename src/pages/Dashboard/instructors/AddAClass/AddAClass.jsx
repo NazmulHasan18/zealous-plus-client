@@ -32,7 +32,7 @@ const AddAClass = () => {
                total_seats: parseInt(data.total_seats),
                status: "pending",
                price: parseFloat(data.price),
-               duration: parseFloat(data.duration) + " " + "months",
+               duration: parseFloat(data.duration),
             };
 
             axios

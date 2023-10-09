@@ -21,6 +21,7 @@ import Error from "../pages/home/Error/Error";
 import ManageClasses from "../pages/Dashboard/admins/MangeClasses/ManageClasses";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import Profile from "../pages/Profile/Profile";
+import HowToSelectCourse from "../pages/HowToSelectCourse/HowToSelectCourse";
 
 export const router = createBrowserRouter([
    {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
          {
             path: "/instructor/:id",
             element: <Instructor></Instructor>,
+         },
+         {
+            path: "/how-to-select-course",
+            element: <HowToSelectCourse></HowToSelectCourse>,
          },
          {
             path: "/profile",

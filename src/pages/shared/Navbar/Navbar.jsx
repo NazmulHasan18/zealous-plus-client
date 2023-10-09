@@ -3,7 +3,7 @@ import { themeChange } from "theme-change";
 import { AiFillSetting } from "react-icons/ai";
 import Toggle from "react-toggle";
 import { FaMoon, FaSun } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -54,6 +54,14 @@ const Navbar = () => {
          <li>
             <NavLink to="/classes" className={({ isActive }) => (isActive ? "text-yellow-400" : "")}>
                Classes
+            </NavLink>
+         </li>
+         <li>
+            <NavLink
+               to="/how-to-select-course"
+               className={({ isActive }) => (isActive ? "text-yellow-400" : "")}
+            >
+               How to select course
             </NavLink>
          </li>
          {user ? (
@@ -168,9 +176,11 @@ const Navbar = () => {
                   {navs}
                </ul>
             </div>
-            <a className="btn btn-ghost text-2xl">Zealous Plus</a>
+            <Link to="/" className="btn btn-ghost text-2xl">
+               <img src="./Tube.png" alt="Zealous Plus" className="h-12" />
+            </Link>
          </div>
-         <div className="navbar-end hidden lg:flex">
+         <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1 items-center">{navs}</ul>
          </div>
       </div>
