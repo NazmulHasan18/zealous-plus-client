@@ -11,7 +11,7 @@ const useUsers = () => {
       refetch: refetchUsers,
    } = useQuery(["users", user?.email], async () => {
       const res = await axios.get(
-         `https://zealous-plus-server-d50zfrkhy-nazmulhasan18.vercel.app/users?email=${user?.email}`,
+         `https://zealous-plus-server-6hfivgot4-nazmulhasan18.vercel.app/users?email=${user?.email}`,
          {
             headers: { Authorization: `Bearer ${token}` },
          }

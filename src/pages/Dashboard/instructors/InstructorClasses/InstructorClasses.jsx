@@ -1,5 +1,6 @@
 import SectionTitle from "../../../shared/SectionTitle/SectionTitle";
 import useInstructorClasses from "../../../../hooks/useInstructorClasses";
+import { Link } from "react-router-dom";
 
 const InstructorClasses = () => {
    const { classes, loadingClasses } = useInstructorClasses();
@@ -47,7 +48,9 @@ const InstructorClasses = () => {
                                  </div>
                               </div>
                               <div>
-                                 <div className="font-bold text-lg">{classs.class_name}</div>
+                                 <Link to={`/dashboard/instructor/my-class/${classs._id}`}>
+                                    <div className="font-bold text-lg">{classs.class_name}</div>
+                                 </Link>
                                  <div className="text-sm">Total Seats: {classs.total_seats}</div>
                               </div>
                            </div>

@@ -22,6 +22,7 @@ import ManageClasses from "../pages/Dashboard/admins/MangeClasses/ManageClasses"
 import Payment from "../pages/Dashboard/Payment/Payment";
 import Profile from "../pages/Profile/Profile";
 import HowToSelectCourse from "../pages/HowToSelectCourse/HowToSelectCourse";
+import MyClassUpdate from "../pages/Dashboard/instructors/MyClassUpdate/MyClassUpdate";
 
 export const router = createBrowserRouter([
    {
@@ -110,6 +111,22 @@ export const router = createBrowserRouter([
             element: (
                <InstructorRoute>
                   <InstructorClasses></InstructorClasses>
+               </InstructorRoute>
+            ),
+         },
+         {
+            path: "add_class",
+            element: (
+               <InstructorRoute>
+                  <AddAClass></AddAClass>
+               </InstructorRoute>
+            ),
+         },
+         {
+            path: "instructor/my-class/:id",
+            element: (
+               <InstructorRoute>
+                  <MyClassUpdate></MyClassUpdate>
                </InstructorRoute>
             ),
          },

@@ -11,7 +11,7 @@ const useInstructorClasses = () => {
       refetch: refetchClasses,
    } = useQuery(["classes", user?.email], async () => {
       const res = await axios.get(
-         `https://zealous-plus-server-d50zfrkhy-nazmulhasan18.vercel.app/instructor_classes/${user?.email}`,
+         `https://zealous-plus-server-6hfivgot4-nazmulhasan18.vercel.app/instructor_classes/${user?.email}`,
          {
             headers: { Authorization: `Bearer ${token}` },
          }
