@@ -19,7 +19,7 @@ const CheckoutForm = ({ price, classes }) => {
    console.log(JSON.stringify({ price, classes }));
 
    useEffect(() => {
-      fetch("https://zealous-plus-server-6hfivgot4-nazmulhasan18.vercel.app/create-payment-intent", {
+      fetch("https://zealous-plus-server.vercel.app/create-payment-intent", {
          method: "POST",
          headers: {
             "Content-Type": "application/json",

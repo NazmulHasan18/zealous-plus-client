@@ -95,7 +95,7 @@ const AuthProvider = ({ children }) => {
          console.log(loggedUser);
          if (loggedUser) {
             axios
-               .post("https://zealous-plus-server-6hfivgot4-nazmulhasan18.vercel.app/jwt", {
+               .post("https://zealous-plus-server.vercel.app/jwt", {
                   email: loggedUser.email,
                })
                .then((response) => {

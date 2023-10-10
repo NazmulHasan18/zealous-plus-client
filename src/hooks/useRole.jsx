@@ -8,12 +8,9 @@ const useRole = () => {
 
    const { data: loggedUser, isLoading: roleLoading } = useQuery(["role", user?.email], async () => {
       if (user) {
-         const res = await axios.get(
-            `https://zealous-plus-server-6hfivgot4-nazmulhasan18.vercel.app/user/${user?.email}`,
-            {
-               headers: { Authorization: `Bearer ${token}` },
-            }
-         );
+         const res = await axios.get(`https://zealous-plus-server.vercel.app/user/${user?.email}`, {
+            headers: { Authorization: `Bearer ${token}` },
+         });
 
          return res.data;
       }

@@ -4,15 +4,15 @@ import Swal from "sweetalert2";
 const token = localStorage.getItem("jwt-token");
 
 export const api = axios.create({
-   baseURL: "https://zealous-plus-server-6hfivgot4-nazmulhasan18.vercel.app",
+   baseURL: "https://zealous-plus-server.vercel.app",
 });
 
 export const apiInstance = axios.create({
-   baseURL: "https://zealous-plus-server-6hfivgot4-nazmulhasan18.vercel.app",
+   baseURL: "https://zealous-plus-server.vercel.app",
    headers: { Authorization: `Bearer ${token}` },
 });
 export const apiInstance2 = axios.create({
-   baseURL: "https://zealous-plus-server-6hfivgot4-nazmulhasan18.vercel.app",
+   baseURL: "https://zealous-plus-server.vercel.app",
    headers: { Authorization: `Bearer ${token}` },
 });
 

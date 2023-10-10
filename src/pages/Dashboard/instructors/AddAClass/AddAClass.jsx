@@ -36,13 +36,9 @@ const AddAClass = () => {
             };
 
             axios
-               .post(
-                  `https://zealous-plus-server-6hfivgot4-nazmulhasan18.vercel.app/add_class?email=${user?.email}`,
-                  classs,
-                  {
-                     headers: { Authorization: `Bearer ${token}` },
-                  }
-               )
+               .post(`https://zealous-plus-server.vercel.app/add_class?email=${user?.email}`, classs, {
+                  headers: { Authorization: `Bearer ${token}` },
+               })
                .then(function (response) {
                   if (response?.data?.insertedId) {
                      Swal.fire({
