@@ -23,6 +23,7 @@ import Payment from "../pages/Dashboard/Payment/Payment";
 import Profile from "../pages/Profile/Profile";
 import HowToSelectCourse from "../pages/HowToSelectCourse/HowToSelectCourse";
 import MyClassUpdate from "../pages/Dashboard/instructors/MyClassUpdate/MyClassUpdate";
+import PaymentSuccess from "../pages/Dashboard/Payment/PaymentSuccess";
 
 export const router = createBrowserRouter([
    {
@@ -90,6 +91,14 @@ export const router = createBrowserRouter([
             element: (
                <UserRoute>
                   <BookedClasses></BookedClasses>
+               </UserRoute>
+            ),
+         },
+         {
+            path: "payment-success",
+            element: (
+               <UserRoute>
+                  <PaymentSuccess></PaymentSuccess>
                </UserRoute>
             ),
          },

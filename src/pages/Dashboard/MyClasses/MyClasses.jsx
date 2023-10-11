@@ -34,7 +34,7 @@ const MyClasses = () => {
          <SectionTitle title="My Classes"></SectionTitle>
          <div className="grid gap-8 grid-cols-1 lg:grid-cols-2 mx-auto">
             {myClasses?.map((classs) => (
-               <ClassCard classs={classs} key={classs._id}></ClassCard>
+               <p key={classs._id}>Class Card are Comming soon</p>
             ))}
          </div>
       </div>
