@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Banner = () => {
    return (
       <div>
-         <div className="relative mx-auto p-5 pt-20 lg:p-24 bg-[#754ffe]">
+         <div className="relative mx-auto p-5 pt-20 lg:p-24 lg:pr-8 bg-[#754ffe]">
             <div className="max-w-screen-2xl mx-auto ">
                <div className="relative max-w-screen-2xl mx-auto flex flex-col-reverse lg:flex-row justify-between items-center">
                   <div className="lg:w-4/6 pr-10 mt-10 lg:mt-auto">
@@ -27,7 +27,7 @@ const Banner = () => {
                      </div>
                   </div>
 
-                  <img src="https://i.ibb.co/zZ9LKGF/hero-img.png" className="lg: lg:w-[500px]" alt="" />
+                  <img src="./Home_Banner.png" className="lg:h-[600px] lg:w-auto" alt="" />
                </div>
             </div>
          </div>

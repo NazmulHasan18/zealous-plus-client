@@ -12,9 +12,9 @@ const JoinUs = () => {
          <SectionTitle title="Join Us" subTitle="Want to join us! Here how you can do it."></SectionTitle>
          <div className="container lg:mx-auto my-10 flex justify-between gap-10 items-center px-4">
             <img
-               src="https://i.ibb.co/bvJDb7H/nazmul2.png"
+               src="./downside_image.png"
                alt=""
-               className="border-4 border-dotted rounded-full border-red-400 hidden lg:block"
+               className="border-4 lg:w-[1000px] border-dotted rounded-full border-red-400 hidden lg:block"
             />
             <div>
                <div data-aos="fade-left" data-aos-duration="1500">
