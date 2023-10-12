@@ -11,20 +11,20 @@ const MyClassDetails = () => {
    const { data, isLoading } = useQuery(["class"], () =>
       apiInstance.get(`/my_class/${id}?email=${user.email}`)
    );
-   const { data: classList } = useQuery(["class", data], () =>
-      apiInstance.get(`/class_list?email=${data.data.teacher.email}&name=${data.data.class_name}`)
+   const { data: classList, isLoading: isLoading2 } = useQuery(["class", data], () =>
+      apiInstance.get(`/class_list?email=${data?.data?.teacher.email}&name=${data?.data?.class_name}`)
    );
    console.log(classList);
-   const [videoId, setVideoId] = useState(classList.data[0].video_id);
-   if (isLoading) {
+   const [videoId, setVideoId] = useState(classList?.data[0].video_id);
+   if (isLoading || isLoading2) {
       return <p>Loading....</p>;
    }
 
    return (
       <div className="container mx-auto">
          <div className="py-5">
-            <h2 className="text-2xl font-bold">{data.data.class_name}</h2>
-            <p className="text-lg font-semibold">By {data.data.teacher.name}</p>
+            <h2 className="text-2xl font-bold">{data?.data.class_name}</h2>
+            <p className="text-lg font-semibold">By {data?.data.teacher.name}</p>
          </div>
          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-10">
             <div className="relative pt-[56.25%] py-5 p-0 col-span-2">
@@ -39,13 +39,13 @@ const MyClassDetails = () => {
             <div className="bg-base-300 p-6 rounded-md">
                <h2 className="text-xl mb-4 font-bold text-gray-700">Class Content</h2>
                <div className="border">
-                  {classList.data.map((topic) => {
+                  {classList?.data.map((topic) => {
                      return (
                         <div
                            className="flex gap-5 items-center bg-white p-3 rounded-lg shadow-md"
                            key={topic._id}
                         >
-                           <img src={data.data.image} alt="" className="w-12 h-12 rounded-md" />
+                           <img src={data?.data.image} alt="" className="w-12 h-12 rounded-md" />
                            <div>
                               <h3
                                  className="text-lg font-bold cursor-pointer hover:text-orange-600"
