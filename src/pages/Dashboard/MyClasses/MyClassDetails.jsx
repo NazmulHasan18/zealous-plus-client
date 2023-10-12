@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { apiInstance2 } from "../../../API/api";
+import { apiInstance } from "../../../API/api";
 import { useParams } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "react-query";
@@ -9,19 +9,16 @@ const MyClassDetails = () => {
    const { user } = useAuth();
 
    const { data, isLoading } = useQuery(["class"], () =>
-      apiInstance2.get(`/my_class/${id}?email=${user.email}`)
+      apiInstance.get(`/my_class/${id}?email=${user.email}`)
    );
    const { data: classList } = useQuery(["class", data], () =>
-      apiInstance2.get(`/class_list?email=${data.data.teacher.email}&name=${data.data.class_name}`)
+      apiInstance.get(`/class_list?email=${data.data.teacher.email}&name=${data.data.class_name}`)
    );
    console.log(classList);
    const [videoId, setVideoId] = useState(classList.data[0].video_id);
    if (isLoading) {
       return <p>Loading....</p>;
    }
-   const handelClassList = () => {
-      console.log("working");
-   };
 
    return (
       <div className="container mx-auto">
