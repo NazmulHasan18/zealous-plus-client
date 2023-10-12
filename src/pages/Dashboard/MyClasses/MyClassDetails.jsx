@@ -15,7 +15,7 @@ const MyClassDetails = () => {
       apiInstance.get(`/class_list?email=${data?.data?.teacher.email}&name=${data?.data?.class_name}`)
    );
    console.log(classList);
-   const [videoId, setVideoId] = useState(classList?.data[0].video_id);
+   const [videoId, setVideoId] = useState(classList?.data[0]?.video_id);
    if (isLoading || isLoading2) {
       return <p>Loading....</p>;
    }
