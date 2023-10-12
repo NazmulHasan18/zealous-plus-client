@@ -118,7 +118,7 @@ const DashboardNavbar = () => {
                </label>
                <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                  className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-gray-700 rounded-box w-auto z-10"
                >
                   {navLink}
                </ul>

@@ -12,7 +12,7 @@ export const apiInstance = axios.create({
    headers: { Authorization: `Bearer ${token}` },
 });
 export const apiInstance2 = axios.create({
-   baseURL: "https://zealous-plus-server.vercel.app",
+   baseURL: "http://localhost:5000",
    headers: { Authorization: `Bearer ${token}` },
 });
 

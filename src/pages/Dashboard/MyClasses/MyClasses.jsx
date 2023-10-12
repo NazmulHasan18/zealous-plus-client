@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import useAuth from "../../../hooks/useAuth";
 import { apiInstance } from "../../../API/api";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
-import ClassCard from "../../shared/ClassCard/ClassCard";
+import MyClassCard from "./MyClassCard";
 
 const MyClasses = () => {
    const { user } = useAuth();
@@ -32,9 +32,9 @@ const MyClasses = () => {
    return (
       <div className="mb-24">
          <SectionTitle title="My Classes"></SectionTitle>
-         <div className="grid gap-8 grid-cols-1 lg:grid-cols-2 mx-auto">
+         <div className="grid gap-8 grid-cols-1 lg:grid-cols-2 mx-auto container">
             {myClasses?.map((classs) => (
-               <p key={classs._id}>Class Card are Comming soon</p>
+               <MyClassCard classs={classs} key={classs._id}></MyClassCard>
             ))}
          </div>
       </div>

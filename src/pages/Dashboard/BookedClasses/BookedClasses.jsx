@@ -3,7 +3,7 @@ import { apiInstance } from "../../../API/api";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import Swal from "sweetalert2";
 import useSelectedClasses from "../../../hooks/useSelectedClasses";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const BookedClasses = () => {
@@ -136,11 +136,8 @@ const BookedClasses = () => {
          <div className="flex justify-around">
             <p className="text-xl">
                Total Price:
-               <span className="font-bold"> ${totalPrice}</span>
+               <span className="font-bold"> &#8377; {totalPrice}</span>
             </p>
-            <Link to="/dashboard/payment" state={{ price: totalPrice, classes: classes }}>
-               <button className="btn btn-warning mb-4"> Pay All</button>
-            </Link>
          </div>
          <div className="overflow-x-auto">
             <table className="table">

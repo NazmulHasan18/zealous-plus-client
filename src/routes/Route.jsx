@@ -24,6 +24,7 @@ import Profile from "../pages/Profile/Profile";
 import HowToSelectCourse from "../pages/HowToSelectCourse/HowToSelectCourse";
 import MyClassUpdate from "../pages/Dashboard/instructors/MyClassUpdate/MyClassUpdate";
 import PaymentSuccess from "../pages/Dashboard/Payment/PaymentSuccess";
+import MyClassDetails from "../pages/Dashboard/MyClasses/MyClassDetails";
 
 export const router = createBrowserRouter([
    {
@@ -111,9 +112,17 @@ export const router = createBrowserRouter([
             ),
          },
          {
-            path: "payment",
-            element: <Payment></Payment>,
+            path: "my_class/:id",
+            element: (
+               <UserRoute>
+                  <MyClassDetails></MyClassDetails>
+               </UserRoute>
+            ),
          },
+         // {
+         //    path: "payment",
+         //    element: <Payment></Payment>,
+         // },
          // instructors dashboard
          {
             path: "instructor_classes",
