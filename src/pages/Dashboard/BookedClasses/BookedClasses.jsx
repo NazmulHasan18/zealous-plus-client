@@ -1,14 +1,17 @@
 import useAuth from "../../../hooks/useAuth";
-import { apiInstance } from "../../../API/api";
+import { apiInstance, apiInstance2 } from "../../../API/api";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import Swal from "sweetalert2";
 import useSelectedClasses from "../../../hooks/useSelectedClasses";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
 
 const BookedClasses = () => {
    const { user } = useAuth();
    const navigate = useNavigate();
+   const [text, setText] = useState("");
+   const [selectedClass, setSelectedClass] = useState({});
 
    const { classes, loadingClasses, refetchClasses } = useSelectedClasses();
 
@@ -113,6 +116,16 @@ const BookedClasses = () => {
          .catch((err) => console.log(err));
    };
 
+   const handelCouponPay = async (data, coupon) => {
+      const matched = await apiInstance2.get(`/coupon/${coupon}`);
+      if (matched.status === 200) {
+         data.price = parseFloat(data.price - (data.price * 25) / 100);
+         // console.log(data);
+         handelCreateOrderId(data);
+      }
+      console.log(data, coupon);
+   };
+
    if (loadingClasses) {
       return (
          <>
@@ -187,6 +200,15 @@ const BookedClasses = () => {
                            >
                               Pay Now
                            </button>
+                           <button
+                              className="btn btn-xs btn-success ml-4"
+                              onClick={() => {
+                                 document.getElementById("my_modal_1").showModal();
+                                 setSelectedClass(classs);
+                              }}
+                           >
+                              Pay with coupon
+                           </button>
                            {/* </Link> */}
                            <button
                               className="btn btn-xs btn-error ml-4"
@@ -199,6 +221,30 @@ const BookedClasses = () => {
                   ))}
                </tbody>
             </table>
+         </div>
+         <div>
+            <dialog id="my_modal_1" className="modal">
+               <div className="modal-box">
+                  <h3 className="font-bold text-lg">Enter Coupon!</h3>
+                  <input
+                     type="text"
+                     placeholder="Type here"
+                     className="input input-bordered input-warning w-full my-4"
+                     onChange={(e) => setText(e.target.value)}
+                  />
+                  <div className="modal-action">
+                     <form method="dialog">
+                        <button
+                           className="btn btn-success mr-3"
+                           onClick={() => handelCouponPay(selectedClass, text)}
+                        >
+                           Submit
+                        </button>
+                        <button className="btn btn-error">Close</button>
+                     </form>
+                  </div>
+               </div>
+            </dialog>
          </div>
       </div>
    );
