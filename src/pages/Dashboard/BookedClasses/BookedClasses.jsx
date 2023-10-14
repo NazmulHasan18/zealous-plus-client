@@ -1,5 +1,5 @@
 import useAuth from "../../../hooks/useAuth";
-import { apiInstance, apiInstance2 } from "../../../API/api";
+import { apiInstance } from "../../../API/api";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import Swal from "sweetalert2";
 import useSelectedClasses from "../../../hooks/useSelectedClasses";
@@ -117,7 +117,7 @@ const BookedClasses = () => {
    };
 
    const handelCouponPay = async (data, coupon) => {
-      const matched = await apiInstance2.get(`/coupon/${coupon}`);
+      const matched = await apiInstance.get(`/coupon/${coupon}`);
       if (matched.status === 200) {
          data.price = parseFloat(data.price - (data.price * 25) / 100);
          // console.log(data);
